@@ -19,3 +19,11 @@ Clone o repositório do projeto:
 
 ```bash
 git clone https://github.com/fernando-gabre/desafio-laravel.git
+
+ - Atualizar dados do arquivo .env
+
+Executar no diretorio do projeto
+ - composer install
+ - php artisan key:generate
+ - php artisan migrate
+ - php artisan db:seed
