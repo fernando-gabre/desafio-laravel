@@ -1,0 +1,148 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Produtos",
+        "description": "Documentação da API para gerenciamento de produtos. (Obs nunca usei isso estou testando)",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/produtos": {
+            "get": {
+                "tags": [
+                    "Productos"
+                ],
+                "summary": "Obter lista de produtos",
+                "operationId": "0d5699dac07026ee620ef74c2e9c6245",
+                "responses": {
+                    "200": {
+                        "description": "Lista de produtos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Product"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/usuario/{userId}/produtos": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Obter produtos de um usuário específico",
+                "operationId": "ca65ba978ad14614677ed59efe6e0a6f",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID do usuário para buscar os produtos",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalhes do usuário e seus produtos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Código de status HTTP",
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/UserComProduto"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Código de status HTTP",
+                                            "type": "integer"
+                                        },
+                                        "message": {
+                                            "description": "Mensagem de erro",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Product": {
+                "title": "Product",
+                "required": [
+                    "name",
+                    "value",
+                    "category_id",
+                    "user_id"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Nome do produto",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "Valor do produto",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "category_id": {
+                        "description": "ID da categoria do produto",
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "description": "ID do usuário que criou o produto",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "UserComProduto": {
+                "title": "UserComProduto",
+                "properties": {
+                    "id": {
+                        "description": "ID do usuário",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nome do usuário",
+                        "type": "string"
+                    },
+                    "products": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Product"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
