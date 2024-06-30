@@ -18,4 +18,4 @@ Siga os passos abaixo para configurar o projeto em seu ambiente local.
 Clone o repositório do projeto:
 
 ```bash
-git clone https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git
+git clone https://github.com/fernando-gabre/desafio-laravel.git
